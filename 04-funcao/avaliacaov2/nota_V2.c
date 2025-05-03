@@ -1,9 +1,8 @@
 #include<stdio.h>
 
-// prototipo de funções
 void saudacao();
 
-void mediaAvaliacao(float notas[]);
+void mediaAvaliacao(float *notas, int tamanho);
 
 void menu(int *comando);
 
@@ -22,7 +21,10 @@ int main() {
         printf("Qual foi sua nota na avaliação final? ");
         scanf("%f", &notas[2]);
 
-        mediaAvaliacao(notas);
+        float *ptr_notas = notas;
+        int tamanho = sizeof(notas) / sizeof(notas[0]);
+
+        mediaAvaliacao(notas, tamanho);
 
         menu(&comando);
         
@@ -37,19 +39,19 @@ void saudacao()
     printf("|-----------------------------------|\n");
 }
 
-void mediaAvaliacao(float notas[])
+void mediaAvaliacao(float* notas, int tamanho)
 {
     float soma;
 
-    for(int i = 0; i < 3; i++) {
-        soma += notas[i];
+    for(int i = 0; i < tamanho; i++) {
+        soma += *(notas + i);
     }
 
-    float media = soma/ 3;
+    float media = soma/tamanho;
 
     printf("\nA media do aluno foi %.2f\n", media);
     
-    media > 7 ? printf("Aprovado!\n\n") : printf("Reprovado!\n\n");
+    media >= 7 ? printf("Aprovado!\n\n") : printf("Reprovado!\n\n");
 }
 
 void menu(int *comando) {
