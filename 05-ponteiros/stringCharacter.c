@@ -1,18 +1,25 @@
 #include<stdio.h>
 
+void encurtador_string(char *arr, int tamanho_para_encurtar)
+{
+    *(arr + tamanho_para_encurtar) = '\0';
+}
+
 int main()
 {
-    char mensagem[] = "Ola, Mundo";
+    char mensagem[] = "Esta é uma string longa.";
 
     char *ptr = mensagem;
 
     printf("%s\n", mensagem);
 
-    printf("Caracteres: \n");
+    printf("Caracteres: ");
+
+    encurtador_string(ptr, 10);
 
     while (*ptr != '\0')
     {
-        printf("%c \n", *ptr);
+        printf("%c", *ptr);
         ptr++;
     }
 
